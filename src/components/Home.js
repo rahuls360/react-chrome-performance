@@ -3,6 +3,7 @@ import { Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import Header from './Header';
 import Asia from './Asia';
 import Europe from './Europe';
+import America from './America';
 
 const tabData = [
   {
@@ -63,7 +64,7 @@ class Home extends React.Component{
         <Switch>
           <Route path="/asia" component={Asia}/>
           <Route path="/europe" component={Europe}/>
-          <Route path="/america" render={() => <div>America</div>}/>
+          <Route path="/america" component={America}/>
           <Redirect from="/" to="/asia" />
         </Switch>
       </div>
