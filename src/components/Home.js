@@ -38,7 +38,7 @@ class Home extends React.Component{
         <Header />
         <ul style={styles.ul}>
           {tabData.map(tab => (
-            <li onClick={() => this.handleTab(tab.value, tab.id)} style={styles.li}>{tab.name}</li>
+            <li onClick={() => this.handleTab(tab.value, tab.id)} style={styles.li} className={this.state.tab === tab.value && 'active'}>{tab.name}</li>
           ))}
         </ul>
       </div>
