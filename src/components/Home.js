@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import Header from './Header';
 import Asia from './Asia';
+import Europe from './Europe';
 
 const tabData = [
   {
@@ -30,6 +31,17 @@ class Home extends React.Component{
     }
   }
 
+  componentDidMount(){
+    const { location} = this.props;
+
+    const path = location.pathname.slice(1);
+    tabData.forEach(tab => {
+      if (path === tab.id){
+        this.handleTab(tab.value, tab.id)
+      }
+    })
+  }
+
   handleTab = (value, id) => {
     const { history } = this.props;
 
@@ -50,7 +62,7 @@ class Home extends React.Component{
 
         <Switch>
           <Route path="/asia" component={Asia}/>
-          <Route path="/europe" render={() => <div>Europe</div>}/>
+          <Route path="/europe" component={Europe}/>
           <Route path="/america" render={() => <div>America</div>}/>
           <Redirect from="/" to="/asia" />
         </Switch>
