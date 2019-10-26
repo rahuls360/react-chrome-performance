@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import Header from './Header';
 
 const tabData = [
@@ -29,7 +30,11 @@ class Home extends React.Component{
   }
 
   handleTab = (value, id) => {
-    this.setState({tab: value})
+    const { history } = this.props;
+
+    this.setState({tab: value}, () => {
+      history.push(id)
+    })
   }
 
   render(){
@@ -41,6 +46,13 @@ class Home extends React.Component{
             <li onClick={() => this.handleTab(tab.value, tab.id)} style={styles.li} className={this.state.tab === tab.value && 'active'}>{tab.name}</li>
           ))}
         </ul>
+
+        <Switch>
+          <Route path="/asia" render={() => <div>Asia</div>}/>
+          <Route path="/europe" render={() => <div>Europe</div>}/>
+          <Route path="/america" render={() => <div>America</div>}/>
+          <Redirect from="/" to="/asia" />
+        </Switch>
       </div>
     );
   }
@@ -57,4 +69,4 @@ const styles = {
   }
 }
 
-export default Home;
+export default withRouter(Home);

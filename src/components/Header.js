@@ -5,7 +5,7 @@ class Header extends React.Component {
   render() {
     return (
       <div style={styles.container}>
-        <img src={Logo} alt="logo" style={styles.image}/>
+        <img src={Logo} alt="logo" style={styles.image} />
         <div style={styles.container2}>
           <img src="https://avatarfiles.alphacoders.com/693/69306.jpg" alt="avatar" style={styles.avatar}/>
         </div>
