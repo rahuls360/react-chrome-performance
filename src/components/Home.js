@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import { Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import Header from './Header';
-import Asia from './Asia';
-import Europe from './Europe';
-import America from './America';
+const Asia = lazy(() => import('./Asia.js'));
+const Europe = lazy(() => import('./Europe.js'));
+const America = lazy(() => import('./America.js'));
 
 const tabData = [
   {
@@ -62,14 +62,22 @@ class Home extends React.Component{
         </ul>
 
         <Switch>
-          <Route path="/asia" component={Asia}/>
-          <Route path="/europe" component={Europe}/>
-          <Route path="/america" component={America}/>
+          <Route path="/asia" component={WaitingComponent(Asia)}/>
+          <Route path="/europe" component={WaitingComponent(Europe)}/>
+          <Route path="/america" component={WaitingComponent(America)}/>
           <Redirect from="/" to="/asia" />
         </Switch>
       </div>
     );
   }
+}
+
+function WaitingComponent(Component) {
+  return props => (
+    <Suspense fallback={<div>Lazy Loading...</div>}>
+      <Component {...props} />
+    </Suspense>
+  );
 }
 
 const styles = {
